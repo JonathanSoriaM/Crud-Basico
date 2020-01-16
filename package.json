@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/JonathanSoriaM/Crud-Basico/issues"
   },
-  "homepage": "https://github.com/JonathanSoriaM/Crud-Basico#readme"
+  "homepage": "https://github.com/JonathanSoriaM/Crud-Basico#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.7",
+    "path": "^0.12.7",
+    "pug": "^2.0.4",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
