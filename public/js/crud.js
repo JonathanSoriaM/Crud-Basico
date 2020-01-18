@@ -56,6 +56,43 @@
         })
     })
 
+    $('.table tbody').on('click','td button.delete',function(){
+        var table = $('.table').DataTable();
+       
+        var data = table.row($(this).closest("tr")).data();
+        var id = data.id;
+    
+        socket.emit('delate',{id:id})
+    })
+
+    $('.table tbody').on('click','td button.editar',function(){
+        var table = $('.table').DataTable();
+        var data = table.row($(this).closest("tr")).data();
+        var id = data.id;
+        console.log(data.venta)
+        $('.ui.modal.edicion .idproducto').text(id)
+        $('.ui.modal.edicion .nombre').val(data.nombre);
+        $('.ui.modal.edicion .cantidad').val(data.cantidad);
+        $('.ui.modal.edicion .costo').val(data.costo);
+        $('.ui.modal.edicion .venta').val(data.venta)
+
+        $('.ui.modal.edicion ').modal('show');
+    })
+    $('.ui.modal.edicion .editar').click(function(){
+        var id = $('.ui.modal.edicion .idproducto').text();
+        nombre = $('.ui.modal.edicion .nombre').val();
+        cantidad = $('.ui.modal.edicion .cantidad').val();
+        costo = $('.ui.modal.edicion .costo').val();
+        venta =$('.ui.modal.edicion .venta').val();
+        var obj = {
+            nombre:nombre,
+            cantidad:cantidad,
+            costo:costo,
+            venta:venta
+        }
+        socket.emit('editar',{id:id,obj:obj})
+    })
+
 
     $('.guardar').click(function(){
     
@@ -91,5 +128,6 @@
        })
     
     })
+
 
 })(jQuery)

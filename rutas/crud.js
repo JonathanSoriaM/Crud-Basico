@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router();
 mongoose = require('mongoose');
-
+var objectID = require('mongodb').objectID;
 var esquema = require('../DB/schema')
 mongoose.connect(
     "mongodb://localhost:27017/crud",
@@ -23,7 +23,7 @@ router.route('/crud')
             if(err) console.error(err);
             if(doc){
                 console.log(doc)
-                Producto.findOneAndUpdate({id:doc._id},{sinc:{cantidad:cantidad}},function(err,doc){
+                Producto.findOneAndUpdate({_id:doc._id},{$inc:{cantidad:cantidad}},function(err,doc){
                     if(err) console.error(err)
                     res.status(200).send('ok')
                 })

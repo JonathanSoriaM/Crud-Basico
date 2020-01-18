@@ -43,13 +43,23 @@ tienda.on('connection',function(socket){
         if(err) console.error(err)
         socket.emit('tiendita',{doc})
     })
-    /*const escucha = tienda.watch();
-    escucha.on('change',(change)=>{
-      tienda.find({},function(err,doc){
-        if(err) console.error(err);
-        socket.emit('tiendita',{doc})
-      })
-    })*/
+
+socket.on('delate',function(data){
+    var id = data['id'];
+    console.log(id)
+    var obj = data['obj'];
+    coneccion.deleteOne({_id: new ObjectID(id)},obj,function(err){
+        if(err) console.error(err)
+    })
+})
+socket.on('editar',function(data){
+    var id = data['id'];
+    var obj = data['obj'];
+    coneccion.updateOne({_id: new ObjectID(id)},obj,function(err){
+        if(err) console.error(err)
+    })
+})
+    
 })
 http.listen(port, function(){
     console.log("server works")
